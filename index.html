@@ -692,7 +692,8 @@
     'About':           'about.html',
     'Voiceover':       'voiceover.html',
     'Videography':     'videography.html',
-    'The Anna Jukebox':'jukebox.html'
+    'The Anna Jukebox':'jukebox.html',
+    'Gallery':         'gallery.html'
   };
 
   function handleFruitClick(event, pageName) {
@@ -725,7 +726,7 @@
       const url = pageUrls[pageName];
       // Navigate to the destination page after the transition fades in
       setTimeout(() => {
-        if (url && pageName !== 'Home') {
+        if (url) {
           window.location.href = url;
         } else {
           transition.classList.remove('active');
