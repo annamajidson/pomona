@@ -1,0 +1,4 @@
+# Large source files not needed for the website
+*.tif
+*.TIF
+.DS_Store
