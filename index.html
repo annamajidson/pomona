@@ -8,16 +8,97 @@
   @import url('https://fonts.googleapis.com/css2?family=Almendra+Display&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap');
 
+  @font-face {
+    font-family: 'Magnific Chaos';
+    src: url('fonts/MagnificChaos-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     background: #080808;
     min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Almendra Display', serif;
+  }
+
+  /* ===== Hero intro ===== */
+  .hero {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    text-align: center;
+    padding: 0 7%;
+    z-index: 2;
+  }
+
+  .hero-text {
     font-family: 'Almendra Display', serif;
+    font-weight: 400;
+    color: rgba(235, 230, 218, 0.92);
+    font-size: clamp(2.1rem, 6.4vw, 4.6rem);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    max-width: 1150px;
+    opacity: 0;
+    animation: hero-appear 1.8s ease-out 0.4s forwards;
+    text-shadow: 0 0 40px rgba(255,255,255,0.05);
+    text-wrap: balance;
+  }
+
+  .hero-text em {
+    font-family: 'Magnific Chaos', 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.015em;
+  }
+
+  @keyframes hero-appear {
+    0% { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.32em;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: rgba(230, 225, 215, 0.45);
+    text-decoration: none;
+    opacity: 0;
+    animation: hero-cue-fade 1.5s ease-out 2s forwards;
+  }
+
+  .hero-scroll-cue::after {
+    content: '';
+    width: 1px;
+    height: 34px;
+    background: linear-gradient(to bottom, rgba(230,225,215,0.5), transparent);
+    animation: hero-cue-drift 2.4s ease-in-out infinite;
+  }
+
+  @keyframes hero-cue-fade { to { opacity: 1; } }
+  @keyframes hero-cue-drift {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(6px); opacity: 1; }
   }
 
   .scene {
@@ -54,8 +135,8 @@
 
   .tree-container {
     position: relative;
-    width: 750px;
-    height: 720px;
+    width: 860px;
+    height: 826px;
     z-index: 2;
   }
 
@@ -131,10 +212,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    font-family: 'Almendra Display', serif;
-    font-size: 5.2rem;
+    font-family: 'Magnific Chaos', 'Almendra Display', serif;
+    font-size: 4.6rem;
     color: rgba(235, 230, 218, 0.9);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.04em;
     text-shadow:
       0 0 40px rgba(255,255,255,0.06),
       0 0 80px rgba(255,255,255,0.03);
@@ -145,8 +226,8 @@
   }
 
   @keyframes title-appear {
-    0% { opacity: 0; letter-spacing: 0.6em; }
-    100% { opacity: 1; letter-spacing: 0.18em; }
+    0% { opacity: 0; letter-spacing: 0.4em; }
+    100% { opacity: 1; letter-spacing: 0.04em; }
   }
 
   /* Fruit links */
@@ -158,11 +239,10 @@
     text-decoration: none;
   }
 
-  .fruit-link:hover { transform: scale(1.18); }
+  .fruit-link:hover { transform: scale(1.1); }
   .fruit-link:hover .fruit-glow { opacity: 1; }
-  .fruit-link:hover .fruit-label { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .fruit-label.above { top: auto; bottom: 105%; transform: translateX(-50%) translateY(6px); }
-  .fruit-link:hover .fruit-label.above { transform: translateX(-50%) translateY(0); }
+  .fruit-link:hover .fruit-label { color: rgba(235, 230, 218, 1); }
+  .fruit-label.above { top: auto; bottom: 118%; }
 
   .fruit-glow {
     position: absolute;
@@ -175,27 +255,47 @@
   }
 
   .fruit-svg {
-    width: 55px;
-    height: 55px;
+    width: 78px;
+    height: 78px;
     filter: url(#chalk-fruit);
     transition: filter 0.3s ease;
   }
 
+  .fruit-photo {
+    display: block;
+    width: 78px;
+    height: 78px;
+    object-fit: cover;
+    border-radius: 50%;
+    -webkit-mask-image: radial-gradient(circle, black 46%, rgba(0,0,0,0.5) 60%, transparent 74%);
+    mask-image: radial-gradient(circle, black 46%, rgba(0,0,0,0.5) 60%, transparent 74%);
+    filter: sepia(0.28) saturate(0.65) brightness(0.88) contrast(1.08);
+    box-shadow: 0 0 0 1px rgba(230,225,215,0.25);
+    transition: filter 0.3s ease;
+  }
+
+  .fruit-link:hover .fruit-photo {
+    filter: sepia(0.15) saturate(0.8) brightness(0.98) contrast(1.05);
+  }
+
   .fruit-label {
     position: absolute;
-    top: 105%;
+    top: 118%;
     left: 50%;
-    transform: translateX(-50%) translateY(6px);
-    white-space: nowrap;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: 0.9rem;
-    color: rgba(230, 225, 215, 0.85);
-    letter-spacing: 0.12em;
-    opacity: 0;
-    transition: all 0.4s ease;
+    transform: translateX(-50%);
+    width: 132px;
+    white-space: normal;
+    text-align: center;
+    font-family: 'Magnific Chaos', 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: rgba(230, 225, 215, 0.72);
+    letter-spacing: 0.02em;
+    opacity: 1;
+    transition: color 0.4s ease;
     pointer-events: none;
-    text-shadow: 0 0 15px rgba(255,255,255,0.08);
+    text-shadow: 0 0 6px rgba(8,8,8,0.9), 0 0 14px rgba(8,8,8,0.7);
   }
 
   .fruit-link.clicked {
@@ -392,18 +492,31 @@
   }
 
   @media (max-width: 768px) {
-    .tree-container { width: 400px; height: 500px; }
-    .title { font-size: 3rem; }
-    .fruit-svg { width: 42px; height: 42px; }
-    .fruit-label { font-size: 0.72rem; }
+    .tree-container { width: min(420px, 88vw); height: 680px; }
+    .title { font-size: 2.5rem; }
+    .fruit-svg { width: 60px; height: 60px; }
+    .fruit-photo { width: 60px; height: 60px; }
+    .fruit-label { font-size: 0.8rem; width: 110px; }
     .column-accent { display: none; }
     .logo-container img { height: 32px; }
+    .hero { padding: 0 8%; }
+    .hero-text { font-size: 2.1rem; line-height: 1.65; }
+    .hero-scroll-cue { bottom: 6%; }
   }
 </style>
 </head>
 <body>
 
-<div class="scene">
+<section class="hero">
+  <p class="hero-text">
+    Bonjour hi, I'm <em>Anna Majidson</em>,<br>
+    musician, artist, and romantic.<br>
+    Welcome to <em>Pomona's garden</em>.
+  </p>
+  <a class="hero-scroll-cue" href="#garden">Enter</a>
+</section>
+
+<div class="scene" id="garden">
   <div class="chalk-dust" id="chalkDust"></div>
   <div class="vignette"></div>
 
@@ -582,89 +695,62 @@
     </svg>
 
     <!-- POMONA title -->
-    <div class="title">POMONA</div>
+    <div class="title">pomona</div>
 
     <!-- ===== FRUIT LINKS ===== -->
 
     <!-- Home — top center, apple -->
-    <a href="index.html" class="fruit-link fruit-appear fruit-appear-1" style="top: 8%; left: 48%;" onclick="handleFruitClick(event, 'Home')">
+    <a href="index.html" class="fruit-link fruit-appear fruit-appear-1" style="top: 6%; left: 6%;" onclick="handleFruitClick(event, 'Home')">
       <div class="fruit-glow"></div>
       <div class="sway">
-        <svg class="fruit-svg" viewBox="0 0 55 55">
-          <path d="M 27 12 C 21 12, 12 20, 12 30 C 12 41, 19 47, 27 47 C 35 47, 42 41, 42 30 C 42 20, 33 12, 27 12 Z" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 27 12 C 25 8, 27 4, 31 3" fill="none" stroke="rgba(230,225,215,0.6)" stroke-width="1.2"/>
-          <ellipse cx="28" cy="11" rx="4" ry="2.5" fill="none" stroke="rgba(230,225,215,0.3)" stroke-width="0.7" transform="rotate(-15 28 11)"/>
-        </svg>
+        <img class="fruit-svg fruit-photo" src="fruits/home.jpg" alt="Fig">
       </div>
       <span class="fruit-label">Home</span>
     </a>
 
     <!-- About — upper left, pear -->
-    <a href="about.html" class="fruit-link fruit-appear fruit-appear-2" style="top: 18%; left: 20%;" onclick="handleFruitClick(event, 'About')">
+    <a href="about.html" class="fruit-link fruit-appear fruit-appear-2" style="top: 26%; left: 6%;" onclick="handleFruitClick(event, 'About')">
       <div class="fruit-glow"></div>
       <div class="sway-alt">
-        <svg class="fruit-svg" viewBox="0 0 55 55">
-          <path d="M 27 46 C 18 46, 12 38, 12 30 C 12 23, 17 19, 21 15 C 24 12, 25 8, 25 4" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 27 46 C 36 46, 42 38, 42 30 C 42 23, 37 19, 33 15 C 30 12, 29 8, 29 4" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 25 4 C 27 2, 29 2, 29 4" fill="none" stroke="rgba(230,225,215,0.5)" stroke-width="1"/>
-        </svg>
+        <img class="fruit-svg fruit-photo" src="fruits/about.jpg" alt="Pomegranate">
       </div>
       <span class="fruit-label">About</span>
     </a>
 
     <!-- Voiceover — upper right, pomegranate -->
-    <a href="voiceover.html" class="fruit-link fruit-appear fruit-appear-3" style="top: 16%; left: 72%;" onclick="handleFruitClick(event, 'Voiceover')">
+    <a href="voiceover.html" class="fruit-link fruit-appear fruit-appear-3" style="top: 46%; left: 6%;" onclick="handleFruitClick(event, 'Voiceover')">
       <div class="fruit-glow"></div>
       <div class="sway">
-        <svg class="fruit-svg" viewBox="0 0 55 55">
-          <circle cx="27" cy="30" r="16" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 22 14 L 24 10 L 26 12 L 28 8 L 30 12 L 32 10 L 34 14" fill="none" stroke="rgba(230,225,215,0.6)" stroke-width="1.2"/>
-          <circle cx="22" cy="30" r="2.5" fill="none" stroke="rgba(230,225,215,0.2)" stroke-width="0.6"/>
-          <circle cx="32" cy="30" r="2.5" fill="none" stroke="rgba(230,225,215,0.2)" stroke-width="0.6"/>
-          <circle cx="27" cy="36" r="2.5" fill="none" stroke="rgba(230,225,215,0.2)" stroke-width="0.6"/>
-        </svg>
+        <img class="fruit-svg fruit-photo" src="fruits/voiceover.jpg" alt="Strawberry" style="object-position: 50% 62%;">
       </div>
       <span class="fruit-label">Voiceover</span>
     </a>
 
     <!-- Videography — mid left, fig -->
-    <a href="videography.html" class="fruit-link fruit-appear fruit-appear-4" style="top: 30%; left: 8%;" onclick="handleFruitClick(event, 'Videography')">
+    <a href="videography.html" class="fruit-link fruit-appear fruit-appear-4" style="top: 6%; left: 84%;" onclick="handleFruitClick(event, 'Videography')">
       <div class="fruit-glow"></div>
       <div class="sway-slow">
-        <svg class="fruit-svg" viewBox="0 0 55 55">
-          <path d="M 27 6 C 27 6, 27 12, 27 16 C 20 18, 14 25, 14 33 C 14 41, 20 48, 27 48 C 34 48, 40 41, 40 33 C 40 25, 34 18, 27 16" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 27 34 L 27 44" fill="none" stroke="rgba(230,225,215,0.15)" stroke-width="0.7"/>
-        </svg>
+        <img class="fruit-svg fruit-photo" src="fruits/videography.jpg" alt="Cherries">
       </div>
       <span class="fruit-label">Videography</span>
     </a>
 
     <!-- The Anna Jukebox — mid right, cherries -->
-    <a href="jukebox.html" class="fruit-link fruit-appear fruit-appear-5" style="top: 28%; left: 82%;" onclick="handleFruitClick(event, 'The Anna Jukebox')">
+    <a href="jukebox.html" class="fruit-link fruit-appear fruit-appear-5" style="top: 26%; left: 84%;" onclick="handleFruitClick(event, 'The Anna Jukebox')">
       <div class="fruit-glow"></div>
       <div class="sway-alt">
-        <svg class="fruit-svg" viewBox="0 0 55 55">
-          <circle cx="20" cy="38" r="9" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <circle cx="37" cy="36" r="8" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 20 29 C 20 19, 26 9, 30 6" fill="none" stroke="rgba(230,225,215,0.65)" stroke-width="1.2"/>
-          <path d="M 37 28 C 35 18, 32 10, 30 6" fill="none" stroke="rgba(230,225,215,0.65)" stroke-width="1.2"/>
-          <ellipse cx="32" cy="5" rx="5" ry="2.8" fill="none" stroke="rgba(230,225,215,0.35)" stroke-width="0.7" transform="rotate(10 32 5)"/>
-        </svg>
+        <img class="fruit-svg fruit-photo" src="fruits/jukebox.jpg" alt="Pomegranate">
       </div>
       <span class="fruit-label">The Anna Jukebox</span>
     </a>
 
     <!-- Gallery — right-centre branch, plum -->
-    <a href="gallery.html" class="fruit-link fruit-appear fruit-appear-6" style="top: 30%; left: 55%;" onclick="handleFruitClick(event, 'Gallery')">
+    <a href="gallery.html" class="fruit-link fruit-appear fruit-appear-6" style="top: 46%; left: 84%;" onclick="handleFruitClick(event, 'Gallery')">
       <div class="fruit-glow"></div>
       <div class="sway">
-        <svg class="fruit-svg" viewBox="0 0 55 55">
-          <circle cx="27" cy="31" r="15" fill="none" stroke="rgba(230,225,215,0.85)" stroke-width="1.6"/>
-          <path d="M 27 16 C 27 16, 26 10, 29 6" fill="none" stroke="rgba(230,225,215,0.6)" stroke-width="1.2" stroke-linecap="round"/>
-          <path d="M 27 16 C 24 20, 24 25, 25 31" fill="none" stroke="rgba(230,225,215,0.18)" stroke-width="0.8" stroke-linecap="round"/>
-        </svg>
+        <img class="fruit-svg fruit-photo" src="fruits/gallery.jpg" alt="Pomegranate">
       </div>
-      <span class="fruit-label above">Gallery</span>
+      <span class="fruit-label">Gallery</span>
     </a>
   </div>
 
