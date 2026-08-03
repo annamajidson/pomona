@@ -67,6 +67,37 @@
     100% { opacity: 1; transform: translateY(0); }
   }
 
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 44px;
+    opacity: 0;
+    animation: hero-cue-fade 1.5s ease-out 1.3s forwards;
+  }
+
+  .hero-link {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(230, 225, 215, 0.55);
+    text-decoration: none;
+    padding: 10px 24px;
+    border: 1px solid rgba(230, 225, 215, 0.28);
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: color 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  }
+
+  .hero-link:hover {
+    color: rgba(235, 230, 218, 0.95);
+    border-color: rgba(230, 225, 215, 0.6);
+    background: rgba(230, 225, 215, 0.06);
+  }
+
   .hero-scroll-cue {
     position: absolute;
     bottom: 9%;
@@ -502,6 +533,8 @@
     .hero { padding: 0 8%; }
     .hero-text { font-size: 2.1rem; line-height: 1.65; }
     .hero-scroll-cue { bottom: 6%; }
+    .hero-links { margin-top: 32px; gap: 12px; }
+    .hero-link { font-size: 0.74rem; padding: 9px 18px; }
   }
 </style>
 </head>
@@ -513,6 +546,11 @@
     musician, artist, and romantic.<br>
     Welcome to <em>Pomona's garden</em>.
   </p>
+  <div class="hero-links">
+    <a class="hero-link" href="mailto:annamagidson@gmail.com">Email Me</a>
+    <a class="hero-link" href="https://www.instagram.com/annamajidson/" target="_blank" rel="noopener">My Socials</a>
+    <a class="hero-link" href="https://substack.com/@annamajidson" target="_blank" rel="noopener">Read My Substack</a>
+  </div>
   <a class="hero-scroll-cue" href="#garden">Enter</a>
 </section>
 
